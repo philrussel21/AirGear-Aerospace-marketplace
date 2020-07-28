@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :country %>
-    <%= form.text_field :country %>
+    <%= form.country_select :country, {priority_countries: ["AU", "US"]}%>
   </div>
 
   <div class="field">
