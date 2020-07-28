@@ -3,6 +3,7 @@
   <nav class="my-2 my-md-0 mr-md-3">
 
     <%if account_signed_in? %>
+      <%= link_to 'My Account', profile_path(current_account), class: "btn btn-outline-success" %>
       <%= link_to 'Log Out', destroy_account_session_path, method: :delete, class: "btn btn-outline-danger" %>
     <%else%>
     <%= link_to 'Sign Up', new_account_registration_path, class: "btn btn-outline-primary" %>

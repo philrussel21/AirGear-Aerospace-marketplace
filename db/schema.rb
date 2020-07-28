@@ -36,8 +36,11 @@ ActiveRecord::Schema.define(version: 2020_07_28_042534) do
     t.string "postcode"
     t.string "website"
     t.string "contact"
+    t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_profiles_on_account_id"
   end
 
+  add_foreign_key "profiles", "accounts"
 end

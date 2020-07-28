@@ -8,6 +8,7 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.string :postcode
       t.string :website
       t.string :contact
+      t.references :account, null: false, foreign_key: true
 
       t.timestamps
     end
