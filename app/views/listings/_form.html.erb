@@ -1,0 +1,77 @@
+<%= form_with(model: listing, local: true) do |form| %>
+  <% if listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+        <% listing.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.collection_select :category_id, categories, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :part_num %>
+    <%= form.text_field :part_num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :part_name %>
+    <%= form.text_field :part_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :selling_price %>
+    <%= form.text_field :selling_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currency %>
+    <%= form.text_field :currency %>
+  </div>
+
+  <div class="field">
+    <%= form.label :serial_num %>
+    <%= form.text_field :serial_num %>
+  </div>
+
+  <div class="field">
+    <%= form.label :condition %>
+    <%= form.number_field :condition %>
+  </div>
+
+  <div class="field">
+    <%= form.label :form_cert %>
+    <%= form.text_field :form_cert %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cert_date %>
+    <%= form.date_select :cert_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :expiry_date %>
+    <%= form.date_select :expiry_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

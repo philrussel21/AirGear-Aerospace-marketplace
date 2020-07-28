@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root 'pages#index'
+  resources :listings
   resources :profiles, except: [:destroy, :index]
+
+
+  
   devise_for :accounts, path: '', path_names: {
     sign_in: 'login',
     sign_out: 'logout',

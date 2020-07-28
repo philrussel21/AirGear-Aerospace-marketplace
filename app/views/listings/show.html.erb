@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @listing.category.name %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @listing.account.company_name %>
+</p>
+
+<p>
+  <strong>Part num:</strong>
+  <%= @listing.part_num %>
+</p>
+
+<p>
+  <strong>Part name:</strong>
+  <%= @listing.part_name %>
+</p>
+
+<p>
+  <strong>Selling price:</strong>
+  <%= @listing.selling_price %>
+</p>
+
+<p>
+  <strong>Currency:</strong>
+  <%= @listing.currency %>
+</p>
+
+<p>
+  <strong>Serial num:</strong>
+  <%= @listing.serial_num %>
+</p>
+
+<p>
+  <strong>Condition:</strong>
+  <%= @listing.condition %>
+</p>
+
+<p>
+  <strong>Form cert:</strong>
+  <%= @listing.form_cert %>
+</p>
+
+<p>
+  <strong>Cert date:</strong>
+  <%= @listing.cert_date %>
+</p>
+
+<p>
+  <strong>Expiry date:</strong>
+  <%= @listing.expiry_date %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @listing.quantity %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @listing.description %>
+</p>
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>

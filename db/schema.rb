@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_042534) do
+ActiveRecord::Schema.define(version: 2020_07_28_061331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,32 @@ ActiveRecord::Schema.define(version: 2020_07_28_042534) do
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.bigint "account_id", null: false
+    t.string "part_num"
+    t.string "part_name"
+    t.float "selling_price"
+    t.string "currency"
+    t.string "serial_num"
+    t.integer "condition"
+    t.string "form_cert"
+    t.date "cert_date"
+    t.date "expiry_date"
+    t.integer "quantity"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_listings_on_account_id"
+    t.index ["category_id"], name: "index_listings_on_category_id"
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string "country"
     t.string "street"
@@ -42,5 +68,7 @@ ActiveRecord::Schema.define(version: 2020_07_28_042534) do
     t.index ["account_id"], name: "index_profiles_on_account_id"
   end
 
+  add_foreign_key "listings", "accounts"
+  add_foreign_key "listings", "categories"
   add_foreign_key "profiles", "accounts"
 end

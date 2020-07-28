@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: one
+  account: one
+  part_num: MyString
+  part_name: MyString
+  selling_price: 1.5
+  currency: MyString
+  serial_num: MyString
+  condition: 1
+  form_cert: MyString
+  cert_date: 2020-07-28
+  expiry_date: 2020-07-28
+  quantity: 1
+  description: MyText
+
+two:
+  category: two
+  account: two
+  part_num: MyString
+  part_name: MyString
+  selling_price: 1.5
+  currency: MyString
+  serial_num: MyString
+  condition: 1
+  form_cert: MyString
+  cert_date: 2020-07-28
+  expiry_date: 2020-07-28
+  quantity: 1
+  description: MyText
