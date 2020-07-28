@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<h3><%=@profile.account.company_name%></h3>
 <p>
   <strong>Country:</strong>
   <%= @profile.country %>
@@ -35,5 +35,7 @@
   <%= @profile.contact %>
 </p>
 
-<%= link_to 'Edit Account', edit_profile_path(@profile) %> |
-<%= link_to 'Delete Account', account_registration_path, method: :delete, data: {confirm: 'Are you sure you want to delete your account?'} %>
+<%if @profile.account == current_account%>
+  <%= link_to 'Edit Account', edit_profile_path(@profile) %> |
+  <%= link_to 'Delete Account', account_registration_path, method: :delete, data: {confirm: 'Are you sure you want to delete your account?'} %>
+<%end%>

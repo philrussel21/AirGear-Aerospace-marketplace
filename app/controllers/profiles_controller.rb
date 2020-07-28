@@ -1,14 +1,13 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: [:show]
+  before_action :set_account_profile, only: [:edit, :update, :destroy]
 
   # GET /profiles
-  # GET /profiles.json
+  #for admin
   def index
     @profiles = Profile.all
   end
 
-  # GET /profiles/1
-  # GET /profiles/1.json
   def show
   end
 
@@ -28,39 +27,30 @@ class ProfilesController < ApplicationController
     # current_user.profile = @profile
     @profile.account = current_account
 
-    respond_to do |format|
-      if @profile.save
-        format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
-        format.json { render :show, status: :created, location: @profile }
-      else
-        format.html { render :new }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
-      end
+    if @profile.save
+      redirect_to @profile
+      #notice: 'Profile was successfully created.'
+    else
+      render :new
+      # format.json { render json: @profile.errors, status: :unprocessable_entity }
     end
   end
 
   # PATCH/PUT /profiles/1
-  # PATCH/PUT /profiles/1.json
   def update
-    respond_to do |format|
-      if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
-        format.json { render :show, status: :ok, location: @profile }
-      else
-        format.html { render :edit }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
-      end
+    if @profile.update(profile_params)
+      redirect_to @profile
+      #notice: 'Profile was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /profiles/1
-  # DELETE /profiles/1.json
   def destroy
     @profile.destroy
-    respond_to do |format|
-      format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+      redirect_to profiles_url
+      # notice: 'Profile was successfully destroyed.'
   end
 
   private
@@ -72,5 +62,14 @@ class ProfilesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def profile_params
       params.require(:profile).permit(:country, :street, :suburb, :state, :postcode, :website, :contact)
+    end
+
+    # authorise only the user who has created the listing to edit or delete it
+    def set_account_profile
+      id = params[:id]
+      @profile = Profile.find(id)
+      if @profile != current_account.profile
+        redirect_to profile_path
+      end
     end
 end
