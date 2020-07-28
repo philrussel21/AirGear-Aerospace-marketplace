@@ -41,10 +41,12 @@
     <%= form.text_field :serial_num %>
   </div>
 
-  <div class="field">
-    <%= form.label :condition %>
-    <%= form.number_field :condition %>
-  </div>
+  <% conditions.each do |option|%>  
+    <div class="field">
+      <%= form.label option %>
+      <%= form.radio_button :condition, option %>
+    </div>
+  <%end%>
 
   <div class="field">
     <%= form.label :form_cert %>

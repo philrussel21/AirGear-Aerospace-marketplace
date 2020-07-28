@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :authenticate_account!, except: [:index, :show]
-  before_action :set_categories, only: [:new, :edit]
+  before_action :set_categories, :set_conditions, only: [:new, :edit]
   before_action :set_listing, only: [:show]
   before_action :set_account_listing, only: [:edit, :update, :destroy]
 
@@ -73,5 +73,10 @@ class ListingsController < ApplicationController
 
     def set_categories
       @categories = Category.all
+    end
+
+    # TODO - enums
+    def set_conditions
+      @conditions = Listing.conditions.keys
     end
 end
