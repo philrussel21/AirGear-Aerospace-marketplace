@@ -76,6 +76,13 @@
   <div class="field">
   <%= form.label :pictures %>
   <%= form.file_field :pictures, multiple: true, accept:'image/png,image/jpeg,image/jpg' %>
+  
+  <%if listing.pictures.any?%>
+    <ul>Files Attached</ul>
+    <%listing.pictures.each do |pic|%>
+      <li><%= link_to pic.filename, pic, target: :blank %></li>
+    <%end%>
+  <%end%>
   </div>
 
 
