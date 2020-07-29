@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+
+## Seeds file currently not populate production db
+
+
 # populate Category Table
 categories = ["Avionics",
               "Aeroparts",
@@ -20,18 +25,20 @@ categories.each do |category|
 end
 
 
-# populate Accounts Table
-# 10.times do |i|
-#   a = Account.create(company_name: "Test Company #{i+1}", email: "test#{i+1}@email", password: "password123")
-#   a.profile = Profile.create
-#   sample = [1,2,3,4,5].sample
-#   category = Category.all
-#   conditions = Listing.conditions.keys
-#   a.listings.create(category: category[sample],
-#                 part_num: i,
-#                 part_name: "PartName#{i+1}",
-#                 selling_price: "100#{i}",
-#                 currency: "AUD",
-#                 condition: sample
-#               )
-# end
+#populate Accounts Table
+15.times do |i|
+  a = Account.create(company_name: "Test Company #{i+1}", email: "test#{i+1}@email", password: "password123")
+  a.profile = Profile.create
+  arr = [1,2,3,4,5]
+  category = Category.all
+  # conditions = Listing.conditions.keys
+  a.listings.create(category: category[arr.sample],
+                part_num: i,
+                part_name: "PartName#{i+1}",
+                selling_price: "100#{i}",
+                currency: "AUD",
+                condition: arr.sample,
+                description: "Just another Test Record",
+                quantity: arr.sample
+              )
+end
