@@ -1,14 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<%# Part Details %>
+<h2>Part Details</h2>
 <p>
   <strong>Category:</strong>
   <%= @listing.category.name %>
 </p>
 
-<p>
-  <strong>Account:</strong>
-  <%= @listing.account.company_name %>
-</p>
 
 <p>
   <strong>Part num:</strong>
@@ -63,6 +61,29 @@
 <p>
   <strong>Description:</strong>
   <%= @listing.description %>
+</p>
+
+<%# Company Details %>
+<h2>Vendor Details</h2>
+<%= link_to 'See Vendor Details', profile_path(@listing.account.profile) %>
+<p>
+  <strong>Account:</strong>
+  <%= @listing.account.company_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @listing.account.email %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @listing.account.profile.contact %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @listing.account.profile.website %>
 </p>
 
 <%= link_to 'Edit', edit_listing_path(@listing) %> |
