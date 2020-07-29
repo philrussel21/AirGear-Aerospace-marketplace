@@ -1,4 +1,10 @@
 <p id="notice"><%= notice %></p>
+<%if @profile.picture.attached?%>
+  <%= image_tag @profile.picture, alt: "Company Profile Pic" %>
+<%else%>
+  <%= image_tag 'profile_pic_placeholder.png', alt: "Placeholder Image" %>
+<%end%>
+
 <h3><%=@profile.account.company_name%></h3>
 <p>
   <strong>Country:</strong>

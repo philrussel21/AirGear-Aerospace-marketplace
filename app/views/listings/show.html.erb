@@ -86,5 +86,14 @@
   <%= @listing.account.profile.website %>
 </p>
 
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%# TODO - Link should go into messages/inbox %>
+<%if account_signed_in?%>
+  <%= link_to 'Contact Vendor', profile_path(@listing.account.profile) %>
+  <br>
+  <%if current_account == @listing.account%>
+    <%= link_to 'Edit', edit_listing_path(@listing) %> |
+  <%end%>
+<%end%>
+
+
 <%= link_to 'Back', listings_path %>

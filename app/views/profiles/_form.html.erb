@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :picture %>
+    <%=form.file_field :picture, accept: 'image/png,image/jpeg,image/jpg'%>
+  </div>
+
+  <div class="field">
     <%= form.label :country %>
     <%= form.country_select :country, {priority_countries: ["AU", "US"]}%>
   </div>

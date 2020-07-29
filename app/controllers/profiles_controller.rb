@@ -61,7 +61,7 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.require(:profile).permit(:country, :street, :suburb, :state, :postcode, :website, :contact)
+      params.require(:profile).permit(:country, :street, :suburb, :state, :postcode, :website, :contact, :picture)
     end
 
     # authorise only the user who has created the listing to edit or delete it
