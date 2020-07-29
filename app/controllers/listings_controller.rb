@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
-    @listing = Listing.new
+    @listing = Listing.new(serial_num: "N/A", form_cert: "N/A")
   end
 
   # GET /listings/1/edit
@@ -29,6 +29,9 @@ class ListingsController < ApplicationController
         redirect_to @listing
         #notice: 'Listing was successfully created.'
       else
+        set_categories
+        set_conditions
+        set_currencies
         render :new
         #format.json { render json: @listing.errors, status: :unprocessable_entity
       end
@@ -40,6 +43,9 @@ class ListingsController < ApplicationController
         redirect_to @listing
           #notice: 'Listing was successfully updated.'
       else
+        set_categories
+        set_conditions
+        set_currencies
         render :edit
         #@listing.errors, status: :unprocessable_entity }
       end
