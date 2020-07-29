@@ -73,6 +73,12 @@
     <%= form.text_area :description %>
   </div>
 
+  <div class="field">
+  <%= form.label :pictures %>
+  <%= form.file_field :pictures, multiple: true, accept:'image/png,image/jpeg,image/jpg' %>
+  </div>
+
+
   <div class="actions">
     <%= form.submit %>
   </div>

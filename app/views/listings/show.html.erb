@@ -2,6 +2,19 @@
 
 <%# Part Details %>
 <h2>Part Details</h2>
+
+<p>
+  <strong>Files:</strong>
+  <%if @listing.pictures.empty?%>
+    <%= image_tag 'profile_pic_placeholder' %>
+  <%else%>
+    <%@listing.pictures.each do |pic|%>
+      <%= image_tag pic %>
+    <%end%>
+  <%end%>
+</p>
+
+
 <p>
   <strong>Category:</strong>
   <%= @listing.category.name %>

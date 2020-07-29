@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
 
   # GET /listings
   def index
-    @listings = Listing.includes(:category, :account).all
+    @listings = Listing.includes(:category, :account).all.with_attached_pictures
   end
 
   # GET /listings/1
@@ -65,7 +65,7 @@ class ListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def listing_params
-      params.require(:listing).permit(:category_id, :account_id, :part_num, :part_name, :selling_price, :currency, :serial_num, :condition, :form_cert, :cert_date, :expiry_date, :quantity, :description)
+      params.require(:listing).permit(:category_id, :account_id, :part_num, :part_name, :selling_price, :currency, :serial_num, :condition, :form_cert, :cert_date, :expiry_date, :quantity, :description, pictures: [])
     end
 
     # authorise only the user who has created the listing to edit or delete it

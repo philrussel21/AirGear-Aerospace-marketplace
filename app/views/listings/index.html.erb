@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Primary Photo</th>
       <th>Category</th>
       <th>Account</th>
       <th>Part num</th>
@@ -25,6 +26,11 @@
   <tbody>
     <% @listings.each do |listing| %>
       <tr>
+        <%if listing.pictures.empty?%>
+          <td><%= image_tag 'profile_pic_placeholder' %></td>
+        <%else%>
+          <td><%= image_tag listing.pictures.first %></td>
+        <%end%>
         <td><%= listing.category.name %></td>
         <td><%= listing.account.company_name %></td>
         <td><%= listing.part_num %></td>
