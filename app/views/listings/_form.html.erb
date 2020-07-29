@@ -33,7 +33,7 @@
 
   <div class="field">
     <%= form.label :currency %>
-    <%= form.text_field :currency %>
+    <%= form.select(:currency, options_for_select(@currencies, "AUD"))%>
   </div>
 
   <div class="field">

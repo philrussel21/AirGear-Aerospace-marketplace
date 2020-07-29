@@ -29,7 +29,7 @@
         <td><%= listing.account.company_name %></td>
         <td><%= listing.part_num %></td>
         <td><%= listing.part_name %></td>
-        <td><%= listing.selling_price %></td>
+        <td><%= number_to_currency(listing.selling_price) %></td>
         <td><%= listing.currency %></td>
         <td><%= listing.serial_num %></td>
         <td><%= listing.condition %></td>

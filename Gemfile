@@ -31,6 +31,9 @@ gem 'devise'
 #for country_select
 gem 'country_select'
 
+#for currencies gem
+gem 'currencies'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 

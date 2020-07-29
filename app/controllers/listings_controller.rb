@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :authenticate_account!, except: [:index, :show]
-  before_action :set_categories, :set_conditions, only: [:new, :edit]
+  before_action :set_categories, :set_conditions, :set_currencies, only: [:new, :edit]
   before_action :set_listing, only: [:show]
   before_action :set_account_listing, only: [:edit, :update, :destroy]
 
@@ -75,8 +75,13 @@ class ListingsController < ApplicationController
       @categories = Category.all
     end
 
-    # TODO - enums
     def set_conditions
       @conditions = Listing.conditions.keys
     end
+
+    def set_currencies
+      all_currencies = ISO4217::Currency.currencies
+      @currencies = all_currencies.map(&:first)
+    end
+
 end
