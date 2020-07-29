@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
 
   # GET /listings
   def index
-    @listings = Listing.all
+    @listings = Listing.includes(:category, :account).all
   end
 
   # GET /listings/1

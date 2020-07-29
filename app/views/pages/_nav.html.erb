@@ -2,6 +2,12 @@
   <h5 class="my-0 mr-md-auto font-weight-normal"><%= link_to 'AirGear', root_path %></h5>
   <nav class="my-2 my-md-0 mr-md-3">
     <%= link_to 'All Listings', listings_path, class: "btn btn-primary text-light"%>
+
+    <%# Categories Nav %>
+    <%@nav_categories.each do |category|%>
+      <%= link_to category.name, category_path(category.name), class: 'btn btn-info text-light' %>
+    <%end%>
+
     <%if account_signed_in? %>
       <%= link_to 'My Account', profile_path(current_account), class: "btn btn-outline-success" %>
       <%= link_to 'Log Out', destroy_account_session_path, method: :delete, class: "btn btn-outline-danger" %>

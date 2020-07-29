@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'pages#index'
   resources :listings
   resources :profiles, except: [:destroy, :index]
+  get 'categories/:name', to: 'categories#show', as: 'category'
 
 
   
