@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
 
   # GET /listings
   def index
-    @listings = Listing.includes(:category, :account).all.with_attached_pictures
+    @listings = Listing.includes(:category, :account).all.with_attached_pictures.sort_by(&:updated_at)
   end
 
   # GET /listings/1
