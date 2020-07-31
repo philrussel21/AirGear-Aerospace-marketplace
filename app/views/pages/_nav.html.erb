@@ -1,76 +1,69 @@
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-  <h5 class="my-0 mr-md-auto font-weight-normal"><%= link_to 'AirGear', root_path %></h5>
-  <nav class="my-2 my-md-0 mr-md-3">
-    <form class="form-inline my-2 mt-md-0" action="/search">
-      <%=select_tag(:search_by, options_for_select([["Part Number", 'part_num'],["Part Name", 'part_name']]))%>
-      <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <%= link_to 'All Listings', listings_path, class: "btn btn-primary text-light"%>
-
-    <%# Categories Nav %>
-    <%@nav_categories.each do |category|%>
-      <%= link_to category.name, category_path(category.name), class: 'btn btn-info text-light' %>
-    <%end%>
-
-    <%if account_signed_in? %>
-      <%= link_to 'My Account', profile_path(current_account), class: "btn btn-outline-success" %>
-      <%= link_to 'Log Out', destroy_account_session_path, method: :delete, class: "btn btn-outline-danger" %>
-    <%else%>
-    <%= link_to 'New Listing', new_listing_path, class: "btn btn-outline-warning"%>
-    <%= link_to 'Sign Up', new_account_registration_path, class: "btn btn-outline-primary" %>
-    <%= link_to 'Log in', new_account_session_path, class: "btn btn-outline-primary" %>
-    <%end%>
-  </nav>
-</div>
-
 <!--TAILWIND STARTS HERE-->
-
-<nav class="flex flex-col flex-wrap bg-teal-500 p-6">
-  <div class="flex justify-between">
+<nav class="flex flex-col max-h-screen bg-primary px-6 py-4 text-white fixed z-10 w-full overflow-scroll" id="nav">
+  <div class="flex justify-between w-full">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
       <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
       <span class="font-semibold text-xl tracking-tight"><%= link_to 'AirGear', root_path %></h5></span>
     </div>
-    <div class="px-4 flex">
+    <div class="px-1 flex">
       <div class="mx-1 block md:hidden" id="burger">
-        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+        <button class="flex items-center px-3 py-2 border rounded text-white-200 border-white-400 hover:text-white hover:border-white">
           <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
         </button>
       </div>
       <div class="mx-1 block md:hidden" id="find">
-        <button class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+        <button class="flex items-center px-3 py-2 border rounded text-white-200 border-white-400 hover:text-white hover:border-white">
           <svg class="fill-current h-3 w-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"><title>Search</title></path></svg>
         </button>
       </div>
     </div>
   </div>
 
-  <div class="pt-2">
+  <div class="pt-2 w-full">
   <!--Search bar-->
     <form class="h-40 mx-auto flex flex-col justify-around hidden md:block" action="/search" id="search">
       <div class="inline-block relative w-full">
-          <%=select_tag(:search_by, options_for_select([["Part Number", 'part_num'],["Part Name", 'part_name']]), {class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline font-semibold text-center"})%>
+          <%=select_tag(:search_by, options_for_select([["Part Number", 'part_num'],["Part Name", 'part_name']]), {class: "block appearance-none w-full bg-secondary border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline font-semibold text-center"})%>
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            <svg class="text-white fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
           </div>
       </div>
       <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="q" placeholder="Search" aria-label="Search">
-      <button class="w-9/12 mx-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">Search</button>
+      <button class="w-9/12 mx-auto border border-white bg-secondary hover:bg-white text-white hover:text-secondary font-bold py-2 px-4 rounded-full" type="submit">Search</button>
     </form>
   <!--Menu Bar-->
-    <div class="w-full block">
-      <p class="select-none border-b-2 border-gray-300">Browse by Categories</p>
-      <div class="text-sm ">
-        <a href="#responsive-header" class="block mt-4 text-teal-200 hover:text-white mr-4">
-          Docs
-        </a>
-        <a href="#responsive-header" class="block mt-4 text-teal-200 hover:text-white mr-4">
-          Examples
-        </a>
-        <a href="#responsive-header" class="block mt-4 text-teal-200 hover:text-white">
-          Blog
-        </a>
+    <div class="w-full block hidden md:block" id="menu">
+      <button class="mb-2 block w-9/12 mx-auto border border-white bg-secondary hover:bg-white text-white hover:text-secondary font-bold py-2 px-4 rounded-full" type="submit"><%=link_to 'New Listing', new_listing_path%></button>
+      <button class="block w-9/12 mx-auto border border-white bg-secondary hover:bg-white text-white hover:text-secondary font-bold py-2 px-4 rounded-full" type="submit"><%=link_to 'All Listings', listings_path%></button>
+      <p class="select-none border-b border-white mt-2">Browse by Categories</p>
+      <div class="text-sm mb-2">
+        <%# Categories Nav %>
+        <%@nav_categories.each do |category|%>
+          <%= link_to category.name, category_path(category.name), class: 'nav_link hover:border-secondary' %>
+        <%end%>
+      </div>
+      <p class="select-none border-b border-white">Manage Account</p>
+      <div class="text-sm mb-2">
+        <%if account_signed_in? %>
+          <%= link_to 'My Account', profile_path(current_account), class: "nav_link hover:border-secondary" %>
+          <%= link_to 'Log Out', destroy_account_session_path, method: :delete, class: "nav_link hover:border-secondary" %>
+        <%else%>
+          <%= link_to 'Sign Up', new_account_registration_path, class: "nav_link hover:border-secondary" %>
+          <%= link_to 'Log in', new_account_session_path, class: "nav_link hover:border-secondary" %>
+        <%end%>
+      </div>
+      <p class="select-none border-b border-white">Help & Settings</p>
+      <div class="text-sm mb-2">
+        <a href="#" class="nav_link hover:border-secondary">About Us</a>
+        <a href="#" class="nav_link hover:border-secondary">Contact Us</a>
+        <a href="#" class="nav_link hover:border-secondary">Customer Care</a>
+        <a href="#" class="nav_link hover:border-secondary">Privacy Policy</a>
+      </div>
+      <p class="select-none border-b border-white">Socials</p>
+      <div class="text-sm mb-2">
+        <a href="#" class="nav_link hover:border-secondary">LinkedIn</a>
+        <a href="#" class="nav_link hover:border-secondary">Github</a>
+        <a href="#" class="nav_link hover:border-secondary">Twitter</a>
       </div>
     </div>
   </div>
