@@ -1,0 +1,8 @@
+<h1>Search results for "<%=params[:q]%>"</h1>
+
+<%if @listings.empty?%>
+  <h2>No Results found</h2>
+<%else%>
+  <%= render 'dashboard', listings: @listings %>
+<%end%>
+<%= link_to 'See All Listings', listings_path %>

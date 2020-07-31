@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#index'
   resources :listings
+  get 'search', to: 'listings#search'
   resources :profiles, except: [:destroy, :index]
   get 'categories/:name', to: 'categories#show', as: 'category'
 

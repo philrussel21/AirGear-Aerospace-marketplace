@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  before_action :authenticate_account!, except: [:index, :show]
+  before_action :authenticate_account!, except: [:index, :show, :search]
   before_action :set_categories, :set_conditions, :set_currencies, only: [:new, :edit]
   before_action :set_listing, only: [:show]
   before_action :set_account_listing, only: [:edit, :update, :destroy]
@@ -7,6 +7,10 @@ class ListingsController < ApplicationController
   # GET /listings
   def index
     @listings = Listing.includes(:category, :account).all.with_attached_pictures.sort_by(&:updated_at)
+  end
+
+  def search
+    @listings = Listing.where("#{params[:search_by]} LIKE ?", "%" + params[:q] + "%")
   end
 
   # GET /listings/1
