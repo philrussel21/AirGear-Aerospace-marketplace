@@ -6,11 +6,11 @@ class ListingsController < ApplicationController
 
   # GET /listings
   def index
-    @listings = Listing.includes(:category, :account).all.with_attached_pictures.sort_by(&:updated_at)
+    @pagy, @listings = pagy(Listing.includes(:category, :account).all.with_attached_pictures.order("created_at DESC"), items: 12)
   end
 
   def search
-    @listings = Listing.where("#{params[:search_by]} LIKE ?", "%" + params[:q] + "%")
+    @pagy, @listings = pagy(Listing.where("#{params[:search_by]} LIKE ?", "%" + params[:q] + "%"), items: 12)
   end
 
   # GET /listings/1

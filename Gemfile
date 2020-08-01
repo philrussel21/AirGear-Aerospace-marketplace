@@ -34,6 +34,9 @@ gem 'country_select'
 #for currencies gem
 gem 'currencies'
 
+#for pagy (pagination)
+gem 'pagy', '~> 3.5'
+
 #for amazons3
 gem "aws-sdk-s3"
 

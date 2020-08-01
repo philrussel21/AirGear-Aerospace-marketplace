@@ -3,6 +3,6 @@
 <%if @listings.empty?%>
   <h2>No Results found</h2>
 <%else%>
-  <%= render 'dashboard', listings: @listings %>
+  <%= render 'dashboard', {listings: @listings, pagy: @pagy} %>
 <%end%>
 <%= link_to 'See All Listings', listings_path %>
