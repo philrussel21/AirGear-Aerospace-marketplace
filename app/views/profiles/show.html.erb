@@ -1,52 +1,89 @@
 <p id="notice"><%= notice %></p>
-<%if @profile.picture.attached?%>
-  <%= image_tag @profile.picture, alt: "Company Profile Pic" %>
-<%else%>
-  <%= image_tag 'profile_pic_placeholder.png', alt: "Placeholder Image" %>
+<div class="profile-pic w-full mb-4">
+  <%if @profile.picture.attached?%>
+    <%= image_tag @profile.picture, alt: "Company Profile Pic", class: "w-full max-w-sm rounded shadow-md"  %>
+  <%else%>
+    <%= image_tag 'profile_pic_placeholder.png', alt: "Placeholder Image", class: "w-full max-w-sm rounded shadow-md"  %>
 <%end%>
+</div>
 
-<h3><%=@profile.account.company_name%></h3>
-<p>
-  <strong>Country:</strong>
-  <%= @profile.country_name %>
-</p>
+<div class="profile">
+  <h1 class="font-medium text-3xl my-4">
+    <%=@profile.account.company_name%>
+  </h1>
 
-<p>
-  <strong>Street:</strong>
-  <%= @profile.street %>
-</p>
+  <div class="mb-2">
+    <p class="f_label">
+      Country:
+    </p>
+    <p>
+      <%= @profile.country_name %>
+    </p>
+  </div>
 
-<p>
-  <strong>Suburb:</strong>
-  <%= @profile.suburb %>
-</p>
+  <div class="mb-2">
+    <p class="f_label">
+      Street:
+    </p>
+    <p>
+      <%= @profile.street %>
+    </p>
+  </div>
 
-<p>
-  <strong>State:</strong>
-  <%= @profile.state %>
-</p>
+  <div class="mb-2">
+    <p class="f_label">
+      Suburb:
+    </p>
+    <p>
+      <%= @profile.suburb %>
+    </p>
+  </div>
 
-<p>
-  <strong>Postcode:</strong>
-  <%= @profile.postcode %>
-</p>
+  <div class="mb-2">
+    <p class="f_label">
+      State:
+    </p>
+    <p>
+      <%= @profile.state %>
+    </p>
 
-<p>
-  <strong>Website:</strong>
-  <%= @profile.website %>
-</p>
+  </div>
+  <div class="mb-2">
+    <p class="f_label">
+      Postcode:
+    </p>
+    <p>
+      <%= @profile.postcode %>
+    </p>
+  </div>
 
-<p>
-  <strong>Contact:</strong>
-  <%= @profile.contact %>
-</p>
+  <div class="mb-2">
+    <p class="f_label">
+      Website:
+    </p>
+    <p>
+      <%= @profile.website %>
+    </p>
+  </div>
 
-<%if @profile.account == current_account%>
-  <%= link_to 'Edit Account', edit_profile_path(@profile) %> |
-  <%= link_to 'Delete Account', account_registration_path, method: :delete, data: {confirm: 'Are you sure you want to delete your account?'} %>
-<%end%>
+  <div class="mb-2">
+    <p class="f_label">
+      Contact:
+    </p>
+    <p>
+      <%= @profile.contact %>
+    </p>
+  </div>
 
+  <%if @profile.account == current_account%>
+    <div class="profile-options">
+      <%= link_to 'Edit Account', edit_profile_path(@profile), class: "inline-block cursor-pointer bg-blue-200 hover:bg-blue-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %> |
+      <%= link_to 'Delete Account', account_registration_path, method: :delete, data: {confirm: 'Are you sure you want to delete your account?'}, class: "inline-block cursor-pointer bg-red-200 hover:bg-red-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"  %>
+      <%end%>
+    </div>
+</div>
 
+<!--TODO- MAKE A LISTING CARD-->
 <%# Listings of the Profile %>
 
 <h1>Vendor Listings</h1>
