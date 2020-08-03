@@ -15,17 +15,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script -->
   </head>
 
-  <body class="max-h-screen overflow-scroll bg-gray-200">
+  <body class="min-h-screen overflow-scroll bg-gray-200 flex flex-col">
   <header>
     <%= render 'pages/nav' %>
   </header>
-  <main class="container w-4/5 mx-auto pt-20 pb-8">
+  <main class="container w-4/5 max-w-screen-xl mx-auto pt-20 pb-8 flex-grow md:pt-32">
     <!--from devise, can be customised -->
     <%if notice %><div class="notice bg-green-200 text-green-900 shadow-lg rounded px-8 pt-6 pb-8 text-center mx-auto max-w-xs"><%= notice %></div><%end%>
     <%if alert %><div class="alert bg-red-200 text-red-900 shadow-lg rounded px-8 pt-6 pb-8 text-center mx-auto max-w-xs"><%= alert %></div><%end%>
 
     <%= yield %>
   </main>
+
+  <footer>
+    <%= render 'pages/footer' %>
+  </footer>
   </body>
   <%= javascript_pack_tag 'script'%>
 </html>
