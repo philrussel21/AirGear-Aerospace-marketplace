@@ -3,7 +3,7 @@
 <%== pagy_nav(@pagy)%>
 
 <!--CARD--->
-<% @listings.each do |listing| %>
+<% listings.each do |listing| %>
   <div class="card max-w-sm rounded overflow-hidden shadow-lg mx-auto mb-8 bg-white">
     <div class="relative">
       <%if listing.pictures.empty?%>
