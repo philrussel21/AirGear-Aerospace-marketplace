@@ -49,9 +49,9 @@
 
 
 <h2 class="font-medium text-2xl my-4">Vendor Listings</h2>
-
+<!--CARD-->
 <% @profile.account.listings.each do |listing| %>
-  <div class="max-w-sm rounded overflow-hidden shadow-lg mx-auto">
+  <div class="card max-w-sm rounded overflow-hidden shadow-lg mx-auto mb-8 bg-white">
     <div class="relative">
       <%if listing.pictures.empty?%>
         <td><%= image_tag 'profile_pic_placeholder', class: "w-full" %></td>

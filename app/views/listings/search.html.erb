@@ -1,8 +1,10 @@
-<h1>Search results for "<%=params[:q]%>"</h1>
+<h1 class="text-4xl font-medium mb-4">Search results for "<%=params[:q]%>"</h1>
 
 <%if @listings.empty?%>
-  <h2>No Results found</h2>
+  <h2 class="text-xl font-light mb-4">No Results found</h2>
 <%else%>
   <%= render 'dashboard', {listings: @listings, pagy: @pagy} %>
 <%end%>
-<%= link_to 'See All Listings', listings_path %>
+<div class="flex justify-center">
+<%= link_to 'See All Listings', listings_path, class: "inline-block mx-auto border border-white bg-primary hover:bg-hovered text-white font-bold py-2 px-4 rounded-full" %>
+</div>
