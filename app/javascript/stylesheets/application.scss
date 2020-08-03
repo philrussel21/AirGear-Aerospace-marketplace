@@ -10,6 +10,10 @@
     @apply block text-gray-700 text-sm font-bold mb-2;
 }
 
+.c_label {
+    @apply block text-gray-700 text-sm font-bold;
+}
+
 // pagination designs
 pagy-nav {
     @apply .inline-flex .shadow-md;
