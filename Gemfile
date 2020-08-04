@@ -31,6 +31,12 @@ gem 'devise'
 #for country_select
 gem 'country_select'
 
+#for money gem
+gem 'money', '~> 6.7', '>= 6.7.1'
+
+#for exchange rate
+gem 'eu_central_bank', '~> 1.5'
+
 #for currencies gem
 gem 'currencies'
 

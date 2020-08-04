@@ -183,6 +183,15 @@
   </div>
 </div>
 
-<div class="conv-wrapper">
+<div class="conv-wrapper h-40 max-w-screen-md mx-auto bg-white shadow-lg rounded px-8 pt-6 pb-8 my-4 w-full mx-auto relative">
+  <h3 class="font-bold text-xl mb-2">Currency Converter</h3>
+
   <!--CURRENCY CONVERTOR-->
+  <!--MODULE WORKING- NEED TO SET UP A FORM AND STIMULUS JS -->
+  <div>
+    <p>Selling Price</p>
+    <p><%=number_to_currency(@listing.selling_price)%> <span><%=@listing.currency%></span></p>
+    <p>Converted Selling Price</p>
+    <p><%= number_to_currency(convert_to_currency(@listing.selling_price, @listing.currency, "EUR").fractional)%></p>
+  </div>
 </div>
