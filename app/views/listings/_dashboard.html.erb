@@ -1,62 +1,81 @@
 
 <!--from pagy gem-->
-<%== pagy_nav(@pagy)%>
-
-<!--CARD--->
-<% listings.each do |listing| %>
-  <div class="card max-w-sm rounded overflow-hidden shadow-lg mx-auto mb-8 bg-white">
-    <div class="relative">
-      <%if listing.pictures.empty?%>
-        <td><%= image_tag 'profile_pic_placeholder', class: "w-full" %></td>
-      <%else%>
-        <td><%= image_tag listing.pictures.first, class: "w-full"%></td>
-      <%end%>
-
-      <span class="absolute top-0 right-0 mr-1 mt-1 inline-block bg-white border border-hovered rounded-full px-4 py-1 text-sm font-semibold text-hovered"><%=listing.category.name%></span>
-      <div class="absolute bg-secondary bottom-0 w-full p-2 text-white flex justify-around">
-        <p class="text-xl"><%= number_to_currency(listing.selling_price)%> <%=listing.currency%></p>
-        <%= link_to 'View', listing, class: "inline-block cursor-pointer bg-hovered hover:bg-white hover:text-hovered border hover:border-hovered text-black font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"  %>
-      </div>
-    </div>
-
-    <%if current_account == listing.account%>
-      <div class="text-center my-4">
-        <%= link_to 'Edit Listing', edit_listing_path(listing), class: "inline-block cursor-pointer w-3/5 bg-blue-200 hover:bg-blue-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2" %>
-        <%= link_to 'Delete Listing', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "inline-block cursor-pointer w-3/5 bg-red-200 hover:bg-red-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
-      </div>
-    <%end%>
-
-    <div class="px-4 py-4 relative">
-        <p class="font-bold text-xl text-center"><%= listing.part_name %></p>
-        <p class="c_label">Part Number:</p>
-        <p class="text-gray-700 text-base mb-4"><%= listing.part_num %></p>
-        <p class="c_label">Condition:</p>
-        <p class="text-gray-700 text-base mb-4"><%= listing.condition.capitalize %></p>
-        <p class="c_label">Quantity:</p>
-        <p class="text-gray-700 text-base mb-4"><%= listing.quantity %></p>
-        <p class="c_label">Description:</p>
-        <p class="text-gray-700 text-base mb-4"><%= listing.description %></p>
-
-        <div class="my-4">
-          <hr>
-        </div>
-
-        <div class="flex">
-          <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
-          <p class="text-gray-700 text-base ml-2"><%= listing.account.company_name %></p>
-        </div>
-        <div class="flex">
-          <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-          <p class="text-gray-700 text-base ml-2"><%= listing.account.profile.suburb%> <%= listing.account.profile.postcode%> <%= listing.account.profile.country%></p>
-        </div>
-        <div class="flex mb-8">
-          <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path></svg>
-          <p class="text-gray-700 text-base ml-2"><%= listing.account.profile.website%></p>
-        </div>
-        <p class="text-gray-700 text-xs absolute bottom-0 left-0 ml-1">Updated on:</p>
-        <span class="absolute right-0 bottom-0 mr-1 mb-1 inline-block bg-gray-400 rounded-full px-4 py-1 text-sm font-semibold text-gray-700"><%=listing.updated_at.to_date%></span>
-    </div>
+<div class="wrapper">
+  <div class="filter">
   </div>
-<%end%>
-<!--from pagy gem-->
-<%== pagy_nav(@pagy)%>
+
+  <div class="content">
+  <%== pagy_nav(@pagy)%>
+
+  <!--CARD--->
+  <div class="listings-cont mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <% listings.each do |listing| %>
+        <div class="card max-w-sm rounded overflow-hidden shadow-lg mx-auto bg-white w-full hover:shadow-2xl">
+          <div class="relative">
+            <%if listing.pictures.empty?%>
+              <td><%= image_tag 'profile_pic_placeholder', class: "w-full" %></td>
+            <%else%>
+              <td><%= image_tag listing.pictures.first, class: "w-full"%></td>
+            <%end%>
+            <!--CATEGORY PILL-->
+            <span class="absolute top-0 right-0 mr-1 mt-1 inline-block bg-white border border-hovered rounded-full px-4 py-1 text-sm font-semibold text-hovered"><%=listing.category.name%></span>
+
+            <!--NEW PILL-->
+            <% if listing.created_at.today? %>
+              <span class="absolute top-0 left-0 ml-1 mt-1 inline-block bg-green-300 rounded-full px-4 py-1 text-sm font-semibold">NEW!</span>
+            <% elsif listing.updated_at.today? %>
+              <!--UPDATED PILL-->
+              <span class="absolute top-0 left-0 ml-1 mt-1 inline-block bg-yellow-300 rounded-full px-4 py-1 text-sm font-semibold">UPDATED!</span>
+            <% end %>
+
+            <!--PRICE AND VIEW-->
+            <div class="absolute bg-secondary bottom-0 w-full p-2 text-white flex justify-around">
+              <p class="text-xl"><%= number_to_currency(listing.selling_price)%> <%=listing.currency%></p>
+              <%= link_to 'View', listing, class: "inline-block cursor-pointer bg-hovered hover:bg-white hover:text-hovered border hover:border-hovered text-black font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"  %>
+            </div>
+          </div>
+
+          <%if current_account == listing.account%>
+            <div class="text-center my-4">
+              <%= link_to 'Edit Listing', edit_listing_path(listing), class: "inline-block cursor-pointer w-3/5 bg-blue-200 hover:bg-blue-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2" %>
+              <%= link_to 'Delete Listing', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "inline-block cursor-pointer w-3/5 bg-red-200 hover:bg-red-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+            </div>
+          <%end%>
+
+          <div class="px-4 py-4 relative">
+              <p class="font-bold text-xl text-center"><%= listing.part_name %></p>
+              <p class="c_label">Part Number:</p>
+              <p class="text-gray-700 text-base mb-4"><%= listing.part_num %></p>
+              <p class="c_label">Condition:</p>
+              <p class="text-gray-700 text-base mb-4"><%= listing.condition.capitalize %></p>
+              <p class="c_label">Quantity:</p>
+              <p class="text-gray-700 text-base mb-4"><%= listing.quantity %></p>
+              <p class="c_label">Description:</p>
+              <p class="text-gray-700 text-base mb-4"><%= truncate(listing.description) %></p>
+
+              <div class="my-4">
+                <hr>
+              </div>
+
+              <div class="flex">
+                <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                <p class="text-gray-700 text-base ml-2"><%= listing.account.company_name %></p>
+              </div>
+              <div class="flex">
+                <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                <p class="text-gray-700 text-base ml-2"><%= listing.account.profile.suburb%> <%= listing.account.profile.postcode%> <%= listing.account.profile.country%></p>
+              </div>
+              <div class="flex mb-8">
+                <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path></svg>
+                <p class="text-gray-700 text-base ml-2"><%= listing.account.profile.website%></p>
+              </div>
+              <p class="text-gray-700 text-xs absolute bottom-0 left-0 ml-1">Updated on:</p>
+              <span class="absolute right-0 bottom-0 mr-1 mb-1 inline-block bg-gray-400 rounded-full px-4 py-1 text-sm font-semibold text-gray-700"><%=listing.updated_at.to_date.strftime("%d/%m/%Y")%></span>
+          </div>
+        </div>
+      <%end%>
+    </div>
+    <!--from pagy gem-->
+    <%== pagy_nav(@pagy)%>
+  </div>
+</div>

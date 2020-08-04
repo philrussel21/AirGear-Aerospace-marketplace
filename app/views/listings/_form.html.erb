@@ -1,8 +1,13 @@
-<%= form_with(model: listing, local: true, class: "bg-white shadow-lg rounded px-8 pt-6 pb-8 my-2  w-full mx-auto") do |form| %>
+<%= form_with(model: listing, local: true, class: "bg-white shadow-lg rounded px-8 pt-6 pb-8 my-2  w-full mx-auto max-w-screen-sm") do |form| %>
+  <!--ICON GOES HERE-->
+  <div class="flex items-center justify-center flex-shrink-0 text-primary mr-6 mb-1 hover:text-hovered">
+    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
+    <span class="font-semibold text-xl tracking-tight"><%= link_to 'AirGear', root_path %></h5></span>
+  </div>
   
   <!--ERRORS-->
   <% if listing.errors.any? %>
-    <div id="error_explanation" class="bg-red-200 text-red-900 shadow-lg rounded px-8 pt-6 pb-8 my-2 max-w-xs">
+    <div id="error_explanation" class="bg-red-200 text-red-900 shadow-lg rounded px-8 pt-6 pb-8 my-2">
       <h2>
       <svg class="fill-current h-8 w-8 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
       <%= pluralize(listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
@@ -15,11 +20,7 @@
     </div>
   <% end %>
 
-  <!--ICON GOES HERE-->
-  <div class="flex items-center justify-center flex-shrink-0 text-primary mr-6 mb-1 hover:text-hovered">
-    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-    <span class="font-semibold text-xl tracking-tight"><%= link_to 'AirGear', root_path %></h5></span>
-  </div>
+  
 
 
   <div class="mb-4">

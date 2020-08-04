@@ -11,7 +11,7 @@
 <%# Part Details %>
 
 <!--IMAGES-->
-<div>
+<div class="max-w-screen-sm mx-auto">
   <%if @listing.pictures.empty?%>
     <%= image_tag 'profile_pic_placeholder', class: "w-full rounded shadow-lg" %>
   <%else%>
@@ -28,155 +28,161 @@
   <%end%>
 </div>
 
-<!--PART DEETS-->
-<div class="bg-white shadow-lg rounded px-8 pt-6 pb-8 my-4 w-full mx-auto relative">
-  <span class="absolute right-0 top-0 mr-1 mt-1 inline-block bg-white rounded-full px-4 py-1 text-sm font-semibold text-hovered border border-hovered"><%=@listing.category.name%></span>
+<div class="wrapper md:flex max-w-screen-md mx-auto">
+  <!--PART DEETS-->
+  <div class="bg-white shadow-lg rounded px-8 pt-6 pb-8 my-4 w-full mx-auto relative md:mb-0 md:mr-4">
+    <span class="absolute right-0 top-0 mr-1 mt-1 inline-block bg-white rounded-full px-4 py-1 text-sm font-semibold text-hovered border border-hovered"><%=@listing.category.name%></span>
 
-  <h1 class="font-medium text-3xl my-4">
-    <%= @listing.part_name %>
-  </h1>
+    <h1 class="font-medium text-3xl my-4">
+      <%= @listing.part_name %>
+    </h1>
 
-  <div class="mb-4">
-    <p class="f_label">
-      Selling price:
-    </p>
-    <p>
-      <%= number_to_currency(@listing.selling_price) %>
-      <%= @listing.currency %>
-    </p>
+    <div class="mb-4">
+      <p class="f_label">
+        Selling price:
+      </p>
+      <p>
+        <%= number_to_currency(@listing.selling_price) %>
+        <%= @listing.currency %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p class="f_label">
+      Part number:
+      </p>
+      <p>
+        <%= @listing.part_num %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p class="f_label">
+        Serial number:
+      </p>
+      <p>
+        <%= @listing.serial_num %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p class="f_label">
+        Condition:
+      </p>
+      <p>
+        <%= @listing.condition.capitalize %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p class="f_label">
+        Form Certification:
+      </p>
+      <p>
+        <%= @listing.form_cert %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p class="f_label">
+        Certifacte date:
+      </p>
+      <p>
+        <%= @listing.cert_date %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p class="f_label">
+        Expiry date:
+      </p>
+      <p>
+        <%= @listing.expiry_date %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p class="f_label">
+        Quantity:
+      </p>
+      <p>
+        <%= @listing.quantity %>
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <p class="f_label">
+        Description:
+      </p>
+      <p>
+        <%= @listing.description %>
+      </p>
+    </div>
   </div>
 
-  <div class="mb-4">
-    <p class="f_label">
-    Part number:
-    </p>
-    <p>
-      <%= @listing.part_num %>
-    </p>
-  </div>
 
-  <div class="mb-4">
-    <p class="f_label">
-      Serial number:
-    </p>
-    <p>
-      <%= @listing.serial_num %>
-    </p>
-  </div>
+  <!--Company Details-->
+  <div class="bg-white shadow-lg rounded px-8 pt-6 pb-8 mt-4 mb- w-full mx-auto">
+    <h2 class="font-bold text-xl mb-2">Vendor Details</h2>
 
-  <div class="mb-4">
-    <p class="f_label">
-      Condition:
-    </p>
-    <p>
-      <%= @listing.condition.capitalize %>
-    </p>
-  </div>
+    <div class="profile-pic w-full">
+      <%if @listing.account.profile.picture.attached?%>
+        <%= image_tag @listing.account.profile.picture, alt: "Company Profile Pic", class: "w-full max-w-xs rounded shadow-md mx-auto" %>
+      <%else%>
+        <%= image_tag 'profile_pic_placeholder.png', alt: "Placeholder Image", class: "w-full max-w-xs rounded shadow-md mx-auto" %>
+      <%end%>
+    </div>
+    <div class="text-center mb-4">
+      <%= link_to 'See Vendor Details', profile_path(@listing.account.profile), class: 'underline' %>
+    </div>
+    
+    <div class="mb-4">
+      <p class="f_label">
+        Account:
+      </p>
+      <p>
+        <%= @listing.account.company_name %>
+      </p>
+    </div>
+    <div class="mb-4">
+      <p class="f_label">
+        Email:
+      </p>
+      <p>
+        <%= @listing.account.email %>
+      </p>
+    </div>
+    <div class="mb-4">
+      <p class="f_label">
+        Contact:
+      </p>
+      <p>
+        <%= @listing.account.profile.contact %>
+      </p>
+    </div>
+    <div class="mb-4">
+      <p class="f_label">
+        Website:
+      </p>
+      <p>
+        <%= @listing.account.profile.website %>
+      </p>
+    </div>
 
-  <div class="mb-4">
-    <p class="f_label">
-      Form Certification:
-    </p>
-    <p>
-      <%= @listing.form_cert %>
-    </p>
-  </div>
-
-  <div class="mb-4">
-    <p class="f_label">
-      Certifacte date:
-    </p>
-    <p>
-      <%= @listing.cert_date %>
-    </p>
-  </div>
-
-  <div class="mb-4">
-    <p class="f_label">
-      Expiry date:
-    </p>
-    <p>
-      <%= @listing.expiry_date %>
-    </p>
-  </div>
-
-  <div class="mb-4">
-    <p class="f_label">
-      Quantity:
-    </p>
-    <p>
-      <%= @listing.quantity %>
-    </p>
-  </div>
-
-  <div class="mb-4">
-    <p class="f_label">
-      Description:
-    </p>
-    <p>
-      <%= @listing.description %>
-    </p>
+    <%# TODO - Link should go into messages/inbox %>
+    <%if account_signed_in?%>
+      <div class="text-center my-4">
+        <%= link_to 'Contact Vendor', profile_path(@listing.account.profile), class: "inline-block cursor-pointer w-4/5 bg-primary hover:bg-hovered text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+      </div>
+      <%if current_account == @listing.account%>
+        <div class="text-center my-4">
+          <%= link_to 'Edit Listing', edit_listing_path(@listing), class: "inline-block cursor-pointer w-4/5 bg-blue-200 hover:bg-blue-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+        </div>
+      <%end%>
+    <%end%>
   </div>
 </div>
 
-
-<%# Company Details %>
-<div class="bg-white shadow-lg rounded px-8 pt-6 pb-8 mt-4 mb- w-full mx-auto">
-  <h2 class="font-bold text-xl mb-2">Vendor Details</h2>
-
-  <div class="profile-pic w-full">
-    <%if @listing.account.profile.picture.attached?%>
-      <%= image_tag @listing.account.profile.picture, alt: "Company Profile Pic", class: "w-full max-w-xs rounded shadow-md" %>
-    <%else%>
-      <%= image_tag 'profile_pic_placeholder.png', alt: "Placeholder Image", class: "w-full max-w-xs rounded shadow-md" %>
-    <%end%>
-  </div>
-  <div class="text-center mb-4">
-    <%= link_to 'See Vendor Details', profile_path(@listing.account.profile), class: 'underline' %>
-  </div>
-  
-  <div class="mb-4">
-    <p class="f_label">
-      Account:
-    </p>
-    <p>
-      <%= @listing.account.company_name %>
-    </p>
-  </div>
-  <div class="mb-4">
-    <p class="f_label">
-      Email:
-    </p>
-    <p>
-      <%= @listing.account.email %>
-    </p>
-  </div>
-  <div class="mb-4">
-    <p class="f_label">
-      Contact:
-    </p>
-    <p>
-      <%= @listing.account.profile.contact %>
-    </p>
-  </div>
-  <div class="mb-4">
-    <p class="f_label">
-      Website:
-    </p>
-    <p>
-      <%= @listing.account.profile.website %>
-    </p>
-  </div>
-
-  <%# TODO - Link should go into messages/inbox %>
-  <%if account_signed_in?%>
-    <div class="text-center my-4">
-      <%= link_to 'Contact Vendor', profile_path(@listing.account.profile), class: "inline-block cursor-pointer w-4/5 bg-primary hover:bg-hovered text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
-    </div>
-    <%if current_account == @listing.account%>
-      <div class="text-center my-4">
-        <%= link_to 'Edit Listing', edit_listing_path(@listing), class: "inline-block cursor-pointer w-4/5 bg-blue-200 hover:bg-blue-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
-      </div>
-    <%end%>
-  <%end%>
+<div class="conv-wrapper">
+  <!--CURRENCY CONVERTOR-->
 </div>

@@ -1,10 +1,9 @@
 <!--TAILWIND STARTS HERE-->
-<nav class="flex flex-col max-h-screen bg-primary px-6 py-4 text-white fixed z-10 w-full overflow-scroll shadow-lg md:pt-0 md:overflow-hidden" id="nav">
+<nav class="bg-primary px-6 py-4 md:bg-transparent md:px-0 md:py-0 flex flex-col max-h-screen text-white fixed z-10 w-full overflow-scroll shadow-lg md:pt-0 md:overflow-hidden" id="nav">
   
-
-  <div class="pt-2 w-full md:grid grid-cols-3 mx-auto max-w-screen-xl">
+  <div class="md:bg-primary pt-2 w-full md:grid grid-cols-3 mx-auto max-w-screen-xl">
   <!--COMPANY ICON-->
-  <div class="flex justify-between w-full md:w-1/5 col-span-1">
+  <div class="md:pl-6 flex justify-between w-full md:w-1/5 col-span-1">
     <div class="flex items-center flex-shrink-0 text-white mr-6">
       <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
       <span class="font-semibold text-xl tracking-tight"><%= link_to 'AirGear', root_path %></h5></span>
@@ -24,7 +23,7 @@
   </div>
 
   <!--Search bar-->
-    <form class="mt-2 h-40 mx-auto flex flex-col justify-around hidden md:block md:flex-row md:h-auto col-span-2 md:flex md:w-full md:justify-end" action="/search" id="search">
+    <form class="md:pr-6 mt-2 h-40 mx-auto flex flex-col justify-around hidden md:block md:flex-row md:h-auto col-span-2 md:flex md:w-full md:justify-end" action="/search" id="search">
       <div class="inline-block relative w-full md:w-56 md:mx-1">
           <%=select_tag(:search_by, options_for_select([["Part Number", 'part_num'],["Part Name", 'part_name']]), {class: "block appearance-none w-full bg-secondary border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline font-semibold text-center"})%>
           <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -35,7 +34,7 @@
       <button class="w-9/12 mx-auto border border-white bg-secondary hover:bg-white text-white hover:text-secondary font-bold py-2 px-4 rounded-full md:w-40 md:mx-1" type="submit">Search</button>
     </form>
   <!--Menu Bar-->
-    <div class="mt-2 w-full block hidden col-span-3 md:flex w-full mx-auto max-w-screen-lg md:mt-0" id="menu">
+    <div class="md:bg-nav md:px-6 md:pb-2 mt-2 w-full block hidden col-span-3 md:flex w-full mx-auto max-w-screen-lg md:mt-0" id="menu">
       <!--LISTING OPTIONS-->
       <div class="w-full md:flex md:w-64">
         <%=link_to 'New Listing', new_listing_path, class: "mb-2 text-center block w-9/12 mx-auto border border-white bg-secondary hover:bg-white text-white hover:text-secondary font-bold py-2 px-4 rounded-full md:mb-0 md:w-auto md:mr-1"%>

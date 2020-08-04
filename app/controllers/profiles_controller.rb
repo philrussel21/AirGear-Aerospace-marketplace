@@ -9,6 +9,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @pagy, @listings = pagy(@profile.account.listings, items: 12)
   end
 
   # GET /profiles/new

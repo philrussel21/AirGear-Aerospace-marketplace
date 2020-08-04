@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 .nav_link {
-    @apply block mt-2 border-b border-primary text-white;
+    @apply block mt-2 text-white;
 }
 
 .f_label {
@@ -15,7 +15,7 @@
 }
 
 // pagination designs
-pagy-nav {
+.pagy-nav {
     @apply .inline-flex .shadow-md;
 }
 .pagy-nav.pagination {
