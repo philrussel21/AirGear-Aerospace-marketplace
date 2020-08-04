@@ -1,4 +1,5 @@
-<%= form_with(model: profile, local: true) do |form| %>
+<div class="w-full flex flex-col items-center">
+<%= form_with(model: profile, local: true, class: "bg-white shadow-lg rounded px-8 pt-6 pb-8 my-2 max-w-xs") do |form| %>
   <% if profile.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
@@ -11,47 +12,56 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :picture %>
+  <div class="mb-4">
+    <%= form.label :picture, "Company Profile Picture", class: "f_label" %>
     <%=form.file_field :picture, accept: 'image/png,image/jpeg,image/jpg'%>
   </div>
 
-  <div class="field">
-    <%= form.label :country %>
-    <%= form.country_select :country, {priority_countries: ["AU", "US"]}%>
+  <div class="mb-4">
+    <%= form.label :country, class: "f_label"  %>
+    <div class="inline-block relative w-full">
+      <%= form.country_select :country, {priority_countries: ["AU", "US"]},{class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"}%>
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+      </div>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :street %>
-    <%= form.text_field :street %>
+  <div class="mb-4">
+    <%= form.label :street, "Street Address", class: "f_label"  %>
+    <%= form.text_field :street, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
-  <div class="field">
-    <%= form.label :suburb %>
-    <%= form.text_field :suburb %>
+  <div class="mb-4">
+    <%= form.label :suburb, class: "f_label"  %>
+    <%= form.text_field :suburb, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
+  <div class="mb-4">
+    <%= form.label :state, class: "f_label"  %>
+    <%= form.text_field :state, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
-  <div class="field">
-    <%= form.label :postcode %>
-    <%= form.text_field :postcode %>
+  <div class="mb-4">
+    <%= form.label :postcode, class: "f_label"  %>
+    <%= form.text_field :postcode, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
-  <div class="field">
-    <%= form.label :website %>
-    <%= form.text_field :website %>
+  <div class="mb-4">
+    <%= form.label :website, class: "f_label"  %>
+    <%= form.text_field :website, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
-  <div class="field">
-    <%= form.label :contact %>
-    <%= form.text_field :contact %>
+  <div class="mb-4">
+    <%= form.label :contact, class: "f_label"  %>
+    <%= form.text_field :contact, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions flex justify-center">
+    <%= form.submit class: "w-3/4 bg-primary hover:bg-hovered text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"%>
   </div>
 <% end %>
+<p class="text-center text-gray-500 text-xs">
+    &copy;2020 Phil Antiporda
+  </p>
+</div>

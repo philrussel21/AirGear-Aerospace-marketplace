@@ -30,7 +30,8 @@
   <%if @profile.account == current_account%>
     <div class="profile-options flex flex-col text-center w-4/5 mx-auto">
       <%= link_to 'Add New Listing', new_listing_path, class: "mb-2 inline-block cursor-pointer bg-green-200 hover:bg-green-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"  %>
-      <%= link_to 'Edit Account', edit_profile_path(@profile), class: "mb-2 inline-block cursor-pointer bg-blue-200 hover:bg-blue-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+      <%= link_to 'Edit Profile', edit_profile_path(@profile), class: "mb-2 inline-block cursor-pointer bg-blue-200 hover:bg-blue-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+      <%= link_to 'Edit Email or Password', edit_account_registration_path, class: "mb-2 inline-block cursor-pointer bg-yellow-200 hover:bg-yellow-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
       <%= link_to 'Delete Account', account_registration_path, method: :delete, data: {confirm: 'Are you sure you want to delete your account?'}, class: "mb-2 inline-block cursor-pointer bg-red-200 hover:bg-red-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"  %>
       <%end%>
     </div>
