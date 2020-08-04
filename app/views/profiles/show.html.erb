@@ -14,7 +14,7 @@
 
   <div class="flex mb-4">
     <svg class="inline-block fill-current h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
-    <p class="text-gray-700 text-base ml-2"><%= @profile.street %>, <%= @profile.suburb %> <%= @profile.state %> <%= @profile.postcode %> <%= @profile.country_name %></p>
+    <%= link_to "#{ @profile.street}, #{@profile.suburb} #{@profile.state} #{@profile.postcode} #{@profile.country_name}", "http://maps.google.com/?q=#{@profile.street}+#{@profile.suburb}+#{@profile.state}+#{@profile.postcode}+#{@profile.country_name}", target: :blank, class: "text-gray-700 text-base ml-2 underline" %>
   </div>
 
   <div class="flex mb-4">
