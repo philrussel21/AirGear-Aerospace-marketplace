@@ -13,9 +13,9 @@
         <div class="card max-w-sm rounded overflow-hidden shadow-lg mx-auto bg-white w-full hover:shadow-2xl">
           <div class="relative">
             <%if listing.pictures.empty?%>
-              <td><%= image_tag 'profile_pic_placeholder', class: "w-full" %></td>
+              <td><%= image_tag 'profile_pic_placeholder', class: "w-full md:h-64" %></td>
             <%else%>
-              <td><%= image_tag listing.pictures.first, class: "w-full"%></td>
+              <td><%= image_tag listing.pictures.first, class: "w-full md:h-64"%></td>
             <%end%>
             <!--CATEGORY PILL-->
             <span class="absolute top-0 right-0 mr-1 mt-1 inline-block bg-white border border-hovered rounded-full px-4 py-1 text-sm font-semibold text-hovered"><%=listing.category.name%></span>

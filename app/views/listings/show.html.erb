@@ -192,6 +192,6 @@
     <p>Selling Price</p>
     <p><%=number_to_currency(@listing.selling_price)%> <span><%=@listing.currency%></span></p>
     <p>Converted Selling Price</p>
-    <p><%= number_to_currency(convert_to_currency(@listing.selling_price, @listing.currency, "EUR").fractional)%></p>
+    <p><%= number_to_currency(convert_to_currency(@listing.selling_price, @listing.currency, "USD").fractional)%> USD</p>
   </div>
 </div>
