@@ -41,7 +41,7 @@
       <p class="f_label">
         Selling price:
       </p>
-      <p>
+      <p class="font-semibold text-xl">
         <%= number_to_currency(@listing.selling_price) %>
         <%= @listing.currency %>
       </p>
@@ -183,15 +183,35 @@
   </div>
 </div>
 
-<div class="conv-wrapper h-40 max-w-screen-md mx-auto bg-white shadow-lg rounded px-8 pt-6 pb-8 my-4 w-full mx-auto relative">
+<div class="conv-wrapper h-auto h-40 max-w-screen-md mx-auto bg-white shadow-lg rounded px-8 pt-6 pb-8 my-4 w-full mx-auto relative">
   <h3 class="font-bold text-xl mb-2">Currency Converter</h3>
 
   <!--CURRENCY CONVERTOR-->
   <!--MODULE WORKING- NEED TO SET UP A FORM AND STIMULUS JS -->
-  <div>
-    <p>Selling Price</p>
-    <p><%=number_to_currency(@listing.selling_price)%> <span><%=@listing.currency%></span></p>
-    <p>Converted Selling Price</p>
-    <p><%= number_to_currency(convert_to_currency(@listing.selling_price, @listing.currency, "USD").fractional)%> USD</p>
+  <div class="md:flex justify-around">
+    <div class="mb-4 md:mb-0">
+    <p class="f_label">Selling Price</p>
+    <p class="font-semibold text-xl"><%=number_to_currency(@listing.selling_price)%> <span><%=@listing.currency%></span></p>
+    </div>
+    <!--CONVERT BUTTON-->
+    <div class="mb-4 md:mb-0">
+      <p class="f_label">Currency Exchange to:</p>
+      <input type="text" value="<%=number_to_currency(@new_value)%>" readonly="readonly" class="w-40 md:w-auto shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="New value appears here">
+      <div class="inline-block relative">
+       <%= select_tag(:currency, options_for_select(@currencies, "AUD"), {class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline", data: {reflex: "change->ExampleReflex#convert_currency", id: @listing.id}})%>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="disclaimer">
+   <p class="f_label">Disclaimer:</p>
+
+   <p class="text-xs"><svg class="inline-block fill-current h-4 w-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+   This currency converter feature does not support all currencies. If no input is shown after a few minutes, it means the chosen NEW CURRENCY is not supported.</p>
+
+   <p class="text-xs"><svg class="inline-block fill-current h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+   Please only use as a reference for an estimated amount in the chosen NEW CURRENCY</p>
   </div>
 </div>

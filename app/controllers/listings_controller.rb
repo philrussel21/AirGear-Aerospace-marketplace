@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :authenticate_account!, except: [:index, :show, :search]
-  before_action :set_categories, :set_conditions, :set_currencies, only: [:new, :edit]
+  before_action :set_categories, :set_conditions, :set_currencies, only: [:new, :edit, :show]
   before_action :set_listing, only: [:show]
   before_action :set_account_listing, only: [:edit, :update, :destroy]
 
