@@ -1,3 +1,20 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
-<%= link_to 'Listings', listings_path %>
+<div>
+  <h1 class="text-4xl font-medium mb-4">AirGear Aerospace</h1>
+  <p>All listings</p>
+  <p>New Listing</p>
+</div>
+
+<div class="aviation_news bg-white shadow-lg rounded px-8 pt-6 pb-8 my-2 w-full mx-auto max-w-screen-sm">
+  <%@news[0..4].each do |news|%>
+  <div class="article mb-4 pt-2 pb-4 relative">
+    <!--p class="text-center text-lg font-semibold"><%=news.title%></!--p-->
+    <%= link_to news.title, news.url, class: "block text-center text-lg font-semibold hover:underline" %>
+    <!--p class="text-s"><%=truncate(news.description, length: 50){link_to "Continue", news.url}%></!--p-->
+    <p class="truncate text-s pb-10"><%=news.description%></p>
+    <!--<%=link_to "Continue", news.url%>-->
+    <%= image_tag news.urlToImage, class: "hidden md:block mb-4"%>
+    <span class="absolute right-0 bottom-0 mr-1 mb-1 inline-block bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700"><%=news.publishedAt.to_date.strftime("%d/%m/%Y")%></span>
+    <hr>
+  </div>
+  <%end%>
+</div
