@@ -9,7 +9,7 @@
 
 
 ## Seeds file currently not populate production db
-
+## TODO Populate database using FakerGem
 
 # populate Category Table
 categories = ["Avionics",
@@ -20,25 +20,39 @@ categories = ["Avionics",
               "Crew",
               "GSE"]
 
+top_currencies = ["AUD", "BHD", "OMR", "GBP", "KYD", "EUR", "CHF", "USD", "CAD", "SGD"]
+
+
 categories.each do |category|
   Category.create(name: category)
 end
 
 
 #populate Accounts Table
-15.times do |i|
-  a = Account.create(company_name: "Test Company #{i+1}", email: "test#{i+1}@email", password: "password123")
-  a.profile = Profile.create
+25.times do
+  name = Faker::Company.unique.name
+  address = Faker::Address
+  a = Account.create(company_name: Faker::Company.unique.name,
+                      email: "#{Faker::Name.first_name}.#{Faker::Name.last_name}@email",
+                      password: "password123")
+
+  a.profile = Profile.create(country: address.country, 
+                              street: address.street_address,
+                              suburb: address.street_name,
+                              state: address.state,
+                              postcode: address.postcode,
+                              website: Faker::Internet.domain_name(subdomain: true, domain: "company"),
+                              contact: Faker::PhoneNumber.phone_number_with_country_code)
+  # a.profile.picture.attach(io: File.open(Faker::Company.logo))
   arr = [1,2,3,4,5]
   category = Category.all
-  # conditions = Listing.conditions.keys
   a.listings.create(category: category[arr.sample],
-                part_num: i,
-                part_name: "PartName#{i+1}",
-                selling_price: "100#{i}",
-                currency: "AUD",
+                part_num: Faker::Alphanumeric.alphanumeric(number: 10, min_numeric: 7),
+                part_name: Faker::ElectricalComponents.active,
+                selling_price: Faker::Number.within(range: 1000..10000),
+                currency: top_currencies.sample,
                 condition: arr.sample,
-                description: "Just another Test Record",
-                quantity: arr.sample
+                description: Faker::ElectricalComponents.active + " " + Faker::Company.bs,
+                quantity: Faker::Number.within(range: 1..50)
               )
 end
