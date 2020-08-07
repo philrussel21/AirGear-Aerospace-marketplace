@@ -4,7 +4,7 @@
 
 <div>
   <h2 class="text-3xl font-medium mb-4">Aviation News</h2>
-  <div class="wrapper flex shadow-lg overflow-hidden md:grid grid-cols-6 gap-2 max-w-screen-md mx-auto h-101 mb-8">
+  <div class="wrapper flex shadow-lg overflow-hidden md:grid grid-cols-6 gap-2 max-w-screen-lg mx-auto h-101 mb-8">
     <div class="lil-nav hidden md:block overflow-y-scroll row-start-auto col-span-1">
       <%@news.each.with_index(1) do |news, i|%>
         <a href="#image-<%=i%>" class="flex mr-2">
@@ -13,15 +13,15 @@
       <%end%>
     </div>
 
-    <div class="gallery overflow-y-scroll col-span-5">
+    <div class="gallery overflow-y-scroll col-span-5" style= "scroll-snap-type: y mandatory;">
       <%@news.each.with_index(1) do |news, i|%>
         <div class="relative">
           <div class="content absolute z-10 inset-x-0 top-0 bg-black bg-opacity-50 text-white pt-2 pb-8 px-4">
-            <%= link_to news.title, news.url, class: "block text-md md:text-xl font-semibold hover:underline", target: :blank %>
-            <span class="absolute right-0 bottom-0 mr-1 mb-1 inline-block bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700"><%=news.publishedAt.to_date.strftime("%d/%m/%Y")%></span>
+            <%= link_to news.title, news.url, class: "block text-md md:text-2xl font-semibold hover:underline", target: :blank %>
+              <span class="absolute right-0 bottom-0 mr-1 mb-1 inline-block bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700"><%=news.publishedAt.to_date.strftime("%d/%m/%Y")%></span>
             <p class="truncate text-xs"><%=news.description%></p>
           </div>
-          <%= image_tag news.urlToImage, id: "image-#{i}", class: "gallery__img object-fit mb-4 w-full h-101"%>
+          <%= image_tag news.urlToImage, id: "image-#{i}", class: "gallery__img object-fit mb-4 w-full h-101", style: "scroll-snap-align: start;"%>
         </div>
       <%end%>
     </div>
