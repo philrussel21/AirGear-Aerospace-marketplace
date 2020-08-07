@@ -43,6 +43,9 @@ gem 'currencies'
 #for pagy (pagination)
 gem 'pagy', '~> 3.5'
 
+# for news-api
+gem 'news-api', '~> 0.0.0'
+
 #for amazons3
 gem "aws-sdk-s3"
 

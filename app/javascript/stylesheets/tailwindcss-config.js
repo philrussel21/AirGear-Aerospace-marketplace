@@ -14,6 +14,9 @@ module.exports = {
                 secondary: "#323232",
                 nav: "#1B2845",
             },
+            spacing: {
+                "101": "25rem",
+            },
         },
     },
     variants: {},

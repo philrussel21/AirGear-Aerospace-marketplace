@@ -1,20 +1,101 @@
-<div>
-  <h1 class="text-4xl font-medium mb-4">AirGear Aerospace</h1>
-  <p>All listings</p>
-  <p>New Listing</p>
+
+<h1 class="text-6xl text-center font-medium mb-4">AirGear Aerospace</h1>
 </div>
 
-<div class="aviation_news bg-white shadow-lg rounded px-8 pt-6 pb-8 my-2 w-full mx-auto max-w-screen-sm">
-  <%@news[0..4].each do |news|%>
-  <div class="article mb-4 pt-2 pb-4 relative">
-    <!--p class="text-center text-lg font-semibold"><%=news.title%></!--p-->
-    <%= link_to news.title, news.url, class: "block text-center text-lg font-semibold hover:underline" %>
-    <!--p class="text-s"><%=truncate(news.description, length: 50){link_to "Continue", news.url}%></!--p-->
-    <p class="truncate text-s pb-10"><%=news.description%></p>
-    <!--<%=link_to "Continue", news.url%>-->
-    <%= image_tag news.urlToImage, class: "hidden md:block mb-4"%>
-    <span class="absolute right-0 bottom-0 mr-1 mb-1 inline-block bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700"><%=news.publishedAt.to_date.strftime("%d/%m/%Y")%></span>
-    <hr>
+<div>
+  <h2 class="text-3xl font-medium mb-4">Aviation News</h2>
+  <div class="wrapper flex shadow-lg overflow-hidden md:grid grid-cols-6 gap-2 max-w-screen-md mx-auto h-101 mb-8">
+    <div class="lil-nav hidden md:block overflow-y-scroll row-start-auto col-span-1">
+      <%@news.each.with_index(1) do |news, i|%>
+        <a href="#image-<%=i%>" class="flex mr-2">
+          <%= image_tag news.urlToImage, class: "lil-nav__img opacity-50 block w-full object-cover mb-2 transition duration-500 ease-out transform hover:scale-105 hover:opacity-100"%>
+        </a>
+      <%end%>
+    </div>
+
+    <div class="gallery overflow-y-scroll col-span-5">
+      <%@news.each.with_index(1) do |news, i|%>
+        <div class="relative">
+          <div class="content absolute z-10 inset-x-0 top-0 bg-black bg-opacity-50 text-white pt-2 pb-8 px-4">
+            <%= link_to news.title, news.url, class: "block text-md md:text-xl font-semibold hover:underline", target: :blank %>
+            <span class="absolute right-0 bottom-0 mr-1 mb-1 inline-block bg-gray-400 rounded-full px-2 py-1 text-xs font-semibold text-gray-700"><%=news.publishedAt.to_date.strftime("%d/%m/%Y")%></span>
+            <p class="truncate text-xs"><%=news.description%></p>
+          </div>
+          <%= image_tag news.urlToImage, id: "image-#{i}", class: "gallery__img object-fit mb-4 w-full h-101"%>
+        </div>
+      <%end%>
+    </div>
   </div>
-  <%end%>
-</div
+</div>
+
+<div>
+  <h2 class="text-3xl font-medium mb-4">Recently Added Listings</h2>
+  <div class="listings-cont mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <% @listings.each do |listing| %>
+        <div class="card max-w-sm rounded overflow-hidden shadow-lg mx-auto bg-white w-full hover:shadow-2xl">
+          <div class="relative">
+            <%if listing.pictures.empty?%>
+              <td><%= image_tag 'profile_pic_placeholder', class: "w-full md:h-64" %></td>
+            <%else%>
+              <td><%= image_tag listing.pictures.first, class: "w-full md:h-64"%></td>
+            <%end%>
+            <!--CATEGORY PILL-->
+            <span class="absolute top-0 right-0 mr-1 mt-1 inline-block bg-white border border-hovered rounded-full px-4 py-1 text-sm font-semibold text-hovered"><%=listing.category.name%></span>
+
+            <!--NEW PILL-->
+            <% if listing.created_at.today? %>
+              <span class="absolute top-0 left-0 ml-1 mt-1 inline-block bg-green-300 rounded-full px-4 py-1 text-sm font-semibold">NEW!</span>
+            <% elsif listing.updated_at.today? %>
+              <!--UPDATED PILL-->
+              <span class="absolute top-0 left-0 ml-1 mt-1 inline-block bg-yellow-300 rounded-full px-4 py-1 text-sm font-semibold">UPDATED!</span>
+            <% end %>
+
+            <!--PRICE AND VIEW-->
+            <div class="absolute bg-secondary bottom-0 w-full p-2 text-white flex justify-around">
+              <p class="text-xl"><%= number_to_currency(listing.selling_price)%> <%=listing.currency%></p>
+              <%= link_to 'View', listing, class: "inline-block cursor-pointer bg-hovered hover:bg-white hover:text-hovered border hover:border-hovered text-black font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"  %>
+            </div>
+          </div>
+
+          <%if current_account == listing.account%>
+            <div class="text-center my-4">
+              <%= link_to 'Edit Listing', edit_listing_path(listing), class: "inline-block cursor-pointer w-3/5 bg-blue-200 hover:bg-blue-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2" %>
+              <%= link_to 'Delete Listing', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "inline-block cursor-pointer w-3/5 bg-red-200 hover:bg-red-700 hover:text-white text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+            </div>
+          <%end%>
+
+          <div class="px-4 py-4 relative">
+              <p class="font-bold text-xl text-center"><%= listing.part_name %></p>
+              <p class="c_label">Part Number:</p>
+              <p class="text-gray-700 text-base mb-4"><%= listing.part_num %></p>
+              <p class="c_label">Condition:</p>
+              <p class="text-gray-700 text-base mb-4"><%= listing.condition.capitalize %></p>
+              <p class="c_label">Quantity:</p>
+              <p class="text-gray-700 text-base mb-4"><%= listing.quantity %></p>
+              <p class="c_label">Description:</p>
+              <p class="text-gray-700 text-base mb-4"><%= truncate(listing.description) %></p>
+
+              <div class="my-4">
+                <hr>
+              </div>
+
+              <div class="flex">
+                <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                <p class="text-gray-700 text-base ml-2"><%= listing.account.company_name %></p>
+              </div>
+              <div class="flex">
+                <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                <p class="text-gray-700 text-base ml-2"><%= listing.account.profile.suburb%> <%= listing.account.profile.postcode%> <%= listing.account.profile.country%></p>
+              </div>
+              <div class="flex mb-8">
+                <svg class="inline-block fill-current h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path></svg>
+                <p class="text-gray-700 text-base ml-2"><%= listing.account.profile.website%></p>
+              </div>
+              <p class="text-gray-700 text-xs absolute bottom-0 left-0 ml-1">Updated on:</p>
+              <span class="absolute right-0 bottom-0 mr-1 mb-1 inline-block bg-gray-400 rounded-full px-4 py-1 text-sm font-semibold text-gray-700"><%=listing.updated_at.to_date.strftime("%d/%m/%Y")%></span>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
