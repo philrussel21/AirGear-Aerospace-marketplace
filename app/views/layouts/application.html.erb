@@ -8,11 +8,6 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-
-    <!--bootstrap CDN-->
-    <!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script -->
   </head>
 
   <body class="min-h-screen overflow-scroll bg-gray-200 flex flex-col">
@@ -21,8 +16,17 @@
     </header>
     <main class="container w-4/5 max-w-screen-xl mx-auto pt-20 pb-8 flex-grow md:pt-40">
       <!--from devise, can be customised -->
-      <%if notice %><div class="notice bg-green-200 text-green-900 shadow-lg rounded px-8 pt-6 pb-8 text-center mx-auto max-w-xs"><%= notice %></div><%end%>
-      <%if alert %><div class="alert bg-red-200 text-red-900 shadow-lg rounded px-8 pt-6 pb-8 text-center mx-auto max-w-xs"><%= alert %></div><%end%>
+      <%if notice %>
+        <div class="notice bg-green-200 text-green-900 shadow-lg rounded px-8 py-6 text-center mx-auto max-w-sm" id="notice">
+          <p><svg class="fill-current h-8 w-8 mr-2 inline-block" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><%= notice %></p>
+        </div>
+      <%end%>
+      
+      <%if alert %>
+        <div class="alert bg-red-200 text-red-900 shadow-lg rounded px-8 py-6 text-center mx-auto max-w-sm" id="alert">
+          <p><svg class="fill-current h-8 w-8 mr-2 inline-block" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg><%= alert %></p>
+        </div>
+      <%end%>
 
       <%= yield %>
     </main>

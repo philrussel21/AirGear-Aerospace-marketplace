@@ -186,19 +186,19 @@
 <div class="conv-wrapper h-auto h-40 max-w-screen-md mx-auto bg-white shadow-lg rounded px-8 pt-6 pb-8 my-4 w-full mx-auto relative">
   <h3 class="font-bold text-xl mb-2">Currency Converter</h3>
 
-  <!--CURRENCY CONVERTOR-->
-  <!--MODULE WORKING- NEED TO SET UP A FORM AND STIMULUS JS -->
+  <!--CURRENCY CONVERTER-->
   <div class="md:flex justify-around">
     <div class="mb-4 md:mb-0">
     <p class="f_label">Selling Price</p>
     <p class="font-semibold text-xl"><%=number_to_currency(@listing.selling_price)%> <span><%=@listing.currency%></span></p>
     </div>
-    <!--CONVERT BUTTON-->
+
     <div class="mb-4 md:mb-0">
       <p class="f_label">Currency Exchange to:</p>
       <input type="text" value="<%=number_to_currency(@new_value)%>" readonly="readonly" class="w-40 md:w-auto shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="New value appears here">
       <div class="inline-block relative">
-       <%= select_tag(:currency, options_for_select(@currencies, "AUD"), {class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline", data: {reflex: "change->ExampleReflex#convert_currency", id: @listing.id}})%>
+      <!--STIMULUS REFLEX LINE-->
+       <%= select_tag(:currency, options_for_select(@currencies), {class: "block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline", data: {reflex: "change->ExampleReflex#convert_currency", id: @listing.id}})%>
         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
         </div>

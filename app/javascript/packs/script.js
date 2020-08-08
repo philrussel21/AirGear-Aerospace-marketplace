@@ -1,3 +1,5 @@
+// For all Toggles
+
 // search icon
 const search = document.querySelector("#find");
 const search_form = document.querySelector("#search");

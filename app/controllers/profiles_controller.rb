@@ -3,13 +3,14 @@ class ProfilesController < ApplicationController
   before_action :set_account_profile, only: [:edit, :update, :destroy]
 
   # GET /profiles
-  #for admin
+  #FUTURE - for admin
   def index
     @profiles = Profile.all
   end
 
   def show
-    @pagy, @listings = pagy(@profile.account.listings, items: 12)
+    # query returns all listing of current profile accompanied by its category and attached pictures limited to 12 listings each time.
+    @pagy, @listings = pagy(@profile.account.listings.includes(:category).with_attached_pictures, items: 12)
   end
 
   # GET /profiles/new
@@ -22,26 +23,21 @@ class ProfilesController < ApplicationController
   end
 
   # POST /profiles
-  # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
-    # current_user.profile = @profile
     @profile.account = current_account
 
     if @profile.save
-      redirect_to @profile
-      #notice: 'Profile was successfully created.'
+      redirect_to @profile, notice: 'Profile was successfully created.'
     else
       render :new
-      # format.json { render json: @profile.errors, status: :unprocessable_entity }
     end
   end
 
   # PATCH/PUT /profiles/1
   def update
     if @profile.update(profile_params)
-      redirect_to @profile
-      #notice: 'Profile was successfully updated.'
+      redirect_to @profile, notice: 'Profile was successfully updated.'
     else
       render :edit
     end
@@ -50,14 +46,13 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1
   def destroy
     @profile.destroy
-      redirect_to profiles_url
-      # notice: 'Profile was successfully destroyed.'
+      redirect_to profiles_url, notice: 'Profile was successfully destroyed.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
-      @profile = Profile.includes(account: :listings).find(params[:id])
+      @profile = Profile.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
@@ -69,8 +64,8 @@ class ProfilesController < ApplicationController
     def set_account_profile
       id = params[:id]
       @profile = Profile.find(id)
-      if @profile != current_account.profile
-        redirect_to profile_path
+      if !account_signed_in? || @profile != current_account.profile
+        redirect_to profile_path, alert: "Access Denied: Unauthorized User"
       end
     end
 end

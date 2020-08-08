@@ -23,6 +23,8 @@ class ExampleReflex < ApplicationReflex
   # Learn more at: https://docs.stimulusreflex.com
 
   def convert_currency
+    # grabs the listing's id and queries it in the db to find out selling price and currency
+    # returns converted amount to chose currency.
     listing = Listing.find(element.dataset[:id])
     selling_price = listing.selling_price
     currency = listing.currency
@@ -33,7 +35,9 @@ class ExampleReflex < ApplicationReflex
   end
 
   private
-
+    # returns converted amount to chosen currency using Money and EuCentralBank gem
+    #If nothing is returned, it means currency
+    # selected is not supported by EuCentralBank Module.
     def currency_exchange(amount, currency_from, currency_to)
       eu_bank = EuCentralBank.new
       eu_bank.update_rates

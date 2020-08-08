@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:company_name])
   end
 
+  #queries all categories from categories table to be made available to navbar
   def set_nav_categories
     @nav_categories = Category.all
   end

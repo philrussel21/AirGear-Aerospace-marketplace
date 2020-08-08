@@ -6,11 +6,19 @@ class ListingsController < ApplicationController
 
   # GET /listings
   def index
-    @pagy, @listings = pagy(Listing.includes(:category, :account).all.with_attached_pictures.order("created_at DESC"), items: 12)
+    # queries for all listings including its associated category, account, account profile & 
+    # attached pictures to be made availabe to listings index.
+    # pagy for pagination gem to automate limit() & offset(), limiting to 12 listings per page
+    @pagy, @listings = pagy(Listing.includes(:category, account: :profile).all.with_attached_pictures.order("created_at DESC"), items: 12)
+
+    # below works but returns more query lines than above
+    # @pagy, @listings = pagy(Listing.includes(:category, :account).all.with_attached_pictures.order("created_at DESC"), items: 12)
+
   end
 
   def search
-    @pagy, @listings = pagy(Listing.where("#{params[:search_by]} LIKE ?", "%" + params[:q] + "%"), items: 12)
+    # queries the db according to chosen category (part_name or part_num) and returns matching results.
+    @pagy, @listings = pagy(Listing.includes(:category, account: :profile).all.with_attached_pictures.where("#{params[:search_by]} LIKE ?", "%" + params[:q] + "%"), items: 12)
   end
 
   # GET /listings/1
@@ -19,6 +27,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
+    # Sets default values when rendering the new form
     @listing = Listing.new(serial_num: "N/A", form_cert: "N/A")
   end
 
@@ -30,28 +39,24 @@ class ListingsController < ApplicationController
   def create
     @listing = current_account.listings.new(listing_params)
       if @listing.save
-        redirect_to @listing
-        #notice: 'Listing was successfully created.'
+        redirect_to @listing, notice: 'Listing was successfully created.'
       else
         set_categories
         set_conditions
         set_currencies
         render :new
-        #format.json { render json: @listing.errors, status: :unprocessable_entity
       end
   end
 
   # PATCH/PUT /listings/1
   def update
       if @listing.update(listing_params)
-        redirect_to @listing
-          #notice: 'Listing was successfully updated.'
+        redirect_to @listing, notice: 'Listing was successfully updated.'
       else
         set_categories
         set_conditions
         set_currencies
         render :edit
-        #@listing.errors, status: :unprocessable_entity }
       end
   end
 
@@ -77,19 +82,22 @@ class ListingsController < ApplicationController
       id = params[:id]
       @listing = current_account.listings.find_by_id(id)
       if @listing == nil
-        redirect_to listings_path
+        redirect_to listings_path, alert: "Access Denied: Unauthorized User"
       end
     end
 
     def set_categories
+      # grabs every category to be used for creating and updating listings
       @categories = Category.all
     end
 
     def set_conditions
+      # grabs every condition to be used for creating and updating listings
       @conditions = Listing.conditions.keys
     end
 
     def set_currencies
+      # grabs every currency from Module to be used for creating and updating listings
       all_currencies = ISO4217::Currency.currencies
       @currencies = all_currencies.map(&:first)
     end
