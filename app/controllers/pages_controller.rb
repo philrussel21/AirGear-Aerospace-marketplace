@@ -10,16 +10,13 @@ class PagesController < ApplicationController
     @listings = Listing.includes(:category, account: :profile).all.with_attached_pictures.order("created_at DESC").limit(8)
   end
 
-  def errors
-  end
-
   private
     # Grabs and returns news from the given date
     def grab_news(date)
-      fortnight_ago = date - 14
+      week_ago = date - 7
       api_key = Rails.application.credentials.dig(:"news-api-key")
       response = News.new(api_key)
-      news = response.get_everything(q:'aircraft', from:"#{fortnight_ago}", sortBy: "popularity")
+      news = response.get_everything(q:'aircraft', from:"#{week_ago}", sortBy: "popularity")
     end
 
     # Grabs today's news. Initially checks if the today's date need to be changed, if so
