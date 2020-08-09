@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_account!, only: [:show]
   before_action :set_profile, only: [:show]
   before_action :set_account_profile, only: [:edit, :update, :destroy]
 
