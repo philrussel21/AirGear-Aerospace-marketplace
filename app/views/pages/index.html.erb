@@ -35,7 +35,7 @@
         <div class="card max-w-sm rounded overflow-hidden shadow-lg mx-auto bg-white w-full hover:shadow-2xl">
           <div class="relative">
             <%if listing.pictures.empty?%>
-              <td><%= image_tag 'profile_pic_placeholder.png', class: "w-full md:h-64" %></td>
+              <td><%= image_tag 'listing_pic_placeholder.png', class: "w-full md:h-64" %></td>
             <%else%>
               <td><%= image_tag listing.pictures.first, class: "w-full md:h-64"%></td>
             <%end%>
