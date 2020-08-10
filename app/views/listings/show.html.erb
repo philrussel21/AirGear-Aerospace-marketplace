@@ -13,7 +13,7 @@
 <!--IMAGES-->
 <div class="max-w-screen-sm mx-auto">
   <%if @listing.pictures.empty?%>
-    <%= image_tag 'listing_pic_placeholder', class: "w-full rounded shadow-lg" %>
+    <%= image_tag 'listing_pic_placeholder.png', class: "w-full rounded shadow-lg" %>
   <%else%>
   <div class="first-photo w-full my-4">
     <%=image_tag @listing.pictures.first, class: "w-full rounded shadow-lg"%>

@@ -3,7 +3,7 @@
     <%if @profile.picture.attached?%>
       <%= image_tag @profile.picture, alt: "Company Profile Pic", class: "w-full max-w-sm rounded shadow-md mx-auto"  %>
     <%else%>
-      <%= image_tag 'profile_pic_placeholder.png', alt: "Placeholder Image", class: "w-full max-w-sm rounded shadow-md mx-auto"  %>
+      <%= image_tag "profile_pic_placeholder.png", alt: "Placeholder Image", class: "w-full max-w-sm rounded shadow-md mx-auto"  %>
   <%end%>
   </div>
 
