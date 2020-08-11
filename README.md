@@ -38,13 +38,14 @@ The purpose of this app is to replace the man in the middle strategy by streamli
 
 *   **Pagination**
 
-    -   Limits the number of listings shown to user to better showcase listings. All gives users the ability to browse through pages.
+    -   Limits the number of listings shown to user to better showcase listings. Gives users the ability to browse through pages.
         ![Image of Pagination Bar](./public/docs/pagination.png)
 
 -   **Profile Authentication**
 
     -   Users would be asked to create an account with their email and company name, existing users would be given an option to log in. After creation, users would be asked to fill their company details by uploading company logo or photo, company address, website and contact information. Users would also be able to keep track of their listings/postings by having them available in their profile.
-        <img src="./public/docs/login.png" width="200"><img src="./public/docs/create_account.png" width="200"><img src="./public/docs/company_profile.png" width="200">
+
+    -   <img src="./public/docs/login.png" width="200"><img src="./public/docs/create_account.png" width="200"><img src="./public/docs/company_profile.png" width="200">
 
 *   **Authorisation**
 
@@ -58,12 +59,12 @@ The purpose of this app is to replace the man in the middle strategy by streamli
 *   **Listing Highlights**
 
     -   The most recent listings are featured in the landing page. All listings page also sorts by having the most recent on top. Newly created listings as well as recently updated listings are also being highlighted to get user's attention and to promote the product.
-        <img src="./public/docs/new.png" width="200"><img src="./public/docs/updated.png" width="200">
+    -   <img src="./public/docs/new.png" width="200"><img src="./public/docs/updated.png" width="200">
 
 *   **Multiple Images**
 
     -   When creating a listing, the seller can upload multiple photos of the part to better promote and market the product.
-        <img src="./public/docs/multiple_images.png" width="200">
+    -   <img src="./public/docs/multiple_images.png" width="200">
 
 *   **Global Currency Support**
 
@@ -138,7 +139,7 @@ Aircraft collectors and enthusiasts looking for aeroparts are also welcome to ta
 
 <img src="./public/docs/userstories1.png" width="300"><img src="./public/docs/userstories2.png" width="300"><img src="./public/docs/userstories3.png" width="300">
 
-#### Wireframes :clipboard:
+### Wireframes :clipboard:
 
 -   **Landing Page**
     ![Landing Page Wireframe](./public/docs/wf_landing.png)
@@ -205,7 +206,7 @@ All relevant information about an aircraft part is readily available to viewers 
 
 -   [**Heroku**](https://www.heroku.com/)
 
-    -   Heroku is a cloud platform as a service supporting several programming languages, including Ruby, that enables developers to build, run, and operate applications. This application was used to as the deployment location to host the live web app in the production environment.
+    -   Heroku is a cloud platform as a service supporting several programming languages, including Ruby, that enables developers to build, run, and operate applications. This application was used as the deployment location to host the live web app in the production environment.
 
 -   [**News-API**](https://newsapi.org/)
 
@@ -230,7 +231,7 @@ All relevant information about an aircraft part is readily available to viewers 
 
 -   **Money**
 
-    -   A Ruby gem library for dealing with money and currency conversion. It represents monetary values as integeres, in cents to produce the most accurate results. This gem was used with eu_central_bank gem to implement the currency conversion feature within the app.
+    -   A Ruby gem library for dealing with money and currency conversion. It represents monetary values as integers, in cents to produce the most accurate results. This gem was used with eu_central_bank gem to implement the currency conversion feature within the app.
 
 -   **EU Central Bank Gem**
 
@@ -242,7 +243,7 @@ All relevant information about an aircraft part is readily available to viewers 
 
 -   **Pagy gem**
 
-    -   Labeled as the ultimate pagination gem to handle the number of listings shown to the user and to provide pagination feature (jump through different pages). Used to replace Active Record helpers #limit() and #offset() without the need of complex mathematical calculations.
+    -   Labeled as the ultimate pagination gem to handle the number of listings shown to the user and to provide pagination feature (jump through different pages). Used to replace Active Record helpers `#limit()` and `#offset()` without the need of complex mathematical calculations.
 
 -   **Stimulus Reflex**
 

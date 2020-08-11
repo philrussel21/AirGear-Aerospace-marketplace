@@ -63,6 +63,7 @@
 
 ## Day 9 - 30/07/20
 
+-   Implemented the Aviation news feature using News-api
 -   Seeded default data to production database
 -   Added sort_by method to sort listings according to their date with newest first
 -   Fixed show profile page to show listings owned by the profile.
