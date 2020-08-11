@@ -128,6 +128,8 @@ Aircraft collectors and enthusiasts looking for aeroparts are also welcome to ta
 -   **Ruby on Rails v6.0.3.2**
 -   **Ruby**
 -   **PostgreSQL**
+-   **Git**
+-   **SCSS**
 -   **HTML**
 -   **CSS**
 -   **Javascript**
