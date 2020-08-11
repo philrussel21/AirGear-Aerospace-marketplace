@@ -126,6 +126,8 @@ Aircraft collectors and enthusiasts looking for aeroparts are also welcome to ta
 #### Tech stack
 
 -   **Ruby on Rails v6.0.3.2**
+-   **Ruby**
+-   **PostgreSQL**
 -   **HTML**
 -   **CSS**
 -   **Javascript**
@@ -273,6 +275,96 @@ All relevant information about an aircraft part is readily available to viewers 
     -   The model used to categorize Listings. Setting this table up takes full control of categories available in the app and makes filtering the listings by category easy.
         -   **Has many Listings**
 
+### The Schema
+
+```ruby
+ActiveRecord::Schema.define(version: 2020_07_29_055443) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "company_name", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_accounts_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.bigint "account_id", null: false
+    t.string "part_num"
+    t.string "part_name"
+    t.float "selling_price"
+    t.string "currency"
+    t.string "serial_num"
+    t.integer "condition"
+    t.string "form_cert"
+    t.date "cert_date"
+    t.date "expiry_date"
+    t.integer "quantity"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_listings_on_account_id"
+    t.index ["category_id"], name: "index_listings_on_category_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "country"
+    t.string "street"
+    t.string "suburb"
+    t.string "state"
+    t.string "postcode"
+    t.string "website"
+    t.string "contact"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_profiles_on_account_id"
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "listings", "accounts"
+  add_foreign_key "listings", "categories"
+  add_foreign_key "profiles", "accounts"
+end
+
+```
+
 ![ERD](./public/docs/erd.png)
 
 ## Task Allocation :pushpin:
@@ -285,3 +377,44 @@ Trello Board has been used to allocate tasks and track the progress of the app. 
 As a good practice, I have set up a daily devlog to track my daily progress and tasks.
 
 [Daily Devlog](./public/docs/devlog.md)
+
+## Testing :warning:
+
+Manual testing was the only testing implemented on this app due to limited knowledge on the concept and the time allocated into building this app. Below are the categories as to where manual testing were commonly made.
+
+-   **Data Structure**
+
+    -   Understanding what happens under the hood when generating `scaffold`
+    -   How data and its attributes are being passed from one element, method or file to another either through routes.
+    -   Accessing data and its attributes using its relationships and associations.
+    -   Accessing data using the values passed in the url.
+    -   Comparing number of queries with and without eager loading resulting to a more optimized application.
+    -   Experimenting in the `rails console` before running lines of code that would affect the database records.
+    -   Multiple image upload feature test
+    -   Implementation of Stimulus Reflex with other ruby gems to make currency converting real time
+
+-   **Data Presentation**
+
+    -   Testing the implementation of using `enums`
+    -   Rendering different partials and moving chunks of code from `file.html.erb` to partials for DRYer code.
+    -   Implementation of pagy gem for pagination feature
+
+-   **Design**
+
+    -   Testing Tailwind designs on different screen width to make it responsive
+    -   Design testings in general with Tailwind used as a CSS framework
+
+-   **General**
+    -   Deployment Testings and compatibility issues particularly with Amazon S3 and Heroku
+
+## Copyright :white_check_mark:
+
+MIT License
+
+Copyright (c) 2020 Phil Antiporda
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
