@@ -5,6 +5,7 @@ class PagesController < ApplicationController
   def index
     # stores News object to instance variable to be used by index.html
     @news = todays_news
+    puts @news.first.urlToImage
     # eager loads listings including its category, account, account's profiile and
     # company picture. Orders them descendingly, newest shown first and limits results to 8 listings.
     @listings = Listing.includes(:category, account: :profile).all.with_attached_pictures.order("created_at DESC").limit(8)
